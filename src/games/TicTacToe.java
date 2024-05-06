@@ -9,11 +9,11 @@ import java.util.Arrays;
 public class TicTacToe extends JPanel {
     private static final int WIDTH = 480;
     private static final int HEIGHT = 640;
+    private static final int CELL_SIZE = 100;
     private static final int[][] BOARD = new int[3][3]; // 0 = None, 1 = X, 2 = O
     private static int CURRENT_PLAYER = 1;
     private int winningLineType = 0; // 1 = horizontal, 2 = vertical, 3 = diagonal (top left to bottom right), 4 = diagonal (top right to bottom left)
     private int winningLineIndex = 0;
-
 
     public TicTacToe() {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -29,50 +29,52 @@ public class TicTacToe extends JPanel {
         int strokeWidth = 5;
         g2d.setStroke(new BasicStroke(strokeWidth));
 
-        g.drawLine(190, 250, 190, 550);
-        g.drawLine(290, 250, 290, 550);
-        g.drawLine(90, 350, 390, 350);
-        g.drawLine(90, 450, 390, 450);
+        // Draw grid lines
+        for (int i = 1; i < 3; i++) {
+            g.drawLine(90, 250 + i * CELL_SIZE, 390, 250 + i * CELL_SIZE); // Horizontal lines
+            g.drawLine(90 + i * CELL_SIZE, 250, 90 + i * CELL_SIZE, 550); // Vertical lines
+        }
 
-        System.out.println(Arrays.deepToString(BOARD));
-
+        // Draw X and O
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (BOARD[i][j] == 1) {
                     g2d.setColor(Color.RED);
-                    g.drawLine(100 + (100 * j), 260 + (100 * i), 180 + (100 * j), 340 + (100 * i));
-                    g.drawLine(100 + (100 * j), 340 + (100 * i), 180 + (100 * j), 260 + (100 * i));
-                }
-            }
-        }
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (BOARD[i][j] == 2) {
+                    g.drawLine(100 + j * CELL_SIZE, 260 + i * CELL_SIZE, 180 + j * CELL_SIZE, 340 + i * CELL_SIZE);
+                    g.drawLine(100 + j * CELL_SIZE, 340 + i * CELL_SIZE, 180 + j * CELL_SIZE, 260 + i * CELL_SIZE);
+                } else if (BOARD[i][j] == 2) {
                     g2d.setColor(Color.BLUE);
-                    g.drawOval((100 + (100 * j)), (260 + (100 * i)), 80, 80);
+                    g.drawOval(100 + j * CELL_SIZE, 260 + i * CELL_SIZE, 80, 80);
                 }
             }
         }
+
+        // Draw current player text
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Arial", Font.BOLD, 24));
+        String currentPlayerText = "Current Player: " + (CURRENT_PLAYER == 1 ? "X" : "O");
+        FontMetrics fm = g.getFontMetrics();
+        int textWidth = fm.stringWidth(currentPlayerText);
+        g.drawString(currentPlayerText, (WIDTH - textWidth) / 2, 50);
 
         // Check win condition and draw winning line
         if (checkWinCondition()) {
-            g2d.setColor(Color.BLACK);
+            g2d.setColor(Color.GREEN);
             if (winningLineType == 1) {
                 // Draw horizontal line
-                g.drawLine(90, 300 + (winningLineIndex * 100), 390, 300 + (winningLineIndex * 100));
+                g.drawLine(90, 300 + winningLineIndex * CELL_SIZE, 390, 300 + winningLineIndex * CELL_SIZE);
             } else if (winningLineType == 2) {
                 // Draw vertical line
-                g.drawLine(140 + (winningLineIndex * 100), 250, 140 + (winningLineIndex * 100), 550);
+                g.drawLine(140 + winningLineIndex * CELL_SIZE, 250, 140 + winningLineIndex * CELL_SIZE, 550);
             } else if (winningLineType == 3) {
                 // Draw diagonal line from top left to bottom right
-                g.drawLine(100, 260, 380, 540);
+                g.drawLine(90, 250, 390, 550);
             } else if (winningLineType == 4) {
                 // Draw diagonal line from top right to bottom left
-                g.drawLine(380, 260, 100, 540);
+                g.drawLine(390, 250, 90, 550);
             }
         }
     }
-
 
     class TicTacToeMouse implements MouseListener {
         public void mouseClicked(MouseEvent e) {}
@@ -81,40 +83,11 @@ public class TicTacToe extends JPanel {
             int x = e.getX();
             int y = e.getY();
 
-            if (x >= 90 && y >= 250 && x <= 190 && y <= 350) {
-                calculateMove(0, 0);
-            }
+            int col = (x - 90) / CELL_SIZE;
+            int row = (y - 250) / CELL_SIZE;
 
-            if (x >= 190 && y >= 250 && x <= 290 && y <= 350) {
-                calculateMove(1, 0);
-            }
-
-            if (x >= 290 && y >= 250 && x <= 390 && y <= 350) {
-                calculateMove(2, 0);
-            }
-
-            if (x >= 90 && y >= 350 && x <= 190 && y <= 450) {
-                calculateMove(0, 1);
-            }
-
-            if (x >= 190 && y >= 350 && x <= 290 && y <= 450) {
-                calculateMove(1, 1);
-            }
-
-            if (x >= 290 && y >= 350 && x <= 390 && y <= 450) {
-                calculateMove(2, 1);
-            }
-
-            if (x >= 90 && y >= 450 && x <= 190 && y <= 550) {
-                calculateMove(0, 2);
-            }
-
-            if (x >= 190 && y >= 450 && x <= 290 && y <= 550) {
-                calculateMove(1, 2);
-            }
-
-            if (x >= 290 && y >= 450 && x <= 390 && y <= 550) {
-                calculateMove(2, 2);
+            if (row >= 0 && row < 3 && col >= 0 && col < 3 && BOARD[row][col] == 0) {
+                calculateMove(row, col);
             }
         }
 
@@ -125,36 +98,26 @@ public class TicTacToe extends JPanel {
         public void mouseExited(MouseEvent e) {}
     }
 
-    private void calculateMove(int xIndex, int yIndex) {
-        if (CURRENT_PLAYER == 1) {
-            BOARD[yIndex][xIndex] = 1;
-            repaint();
-            CURRENT_PLAYER = 2;
-        } else {
-            BOARD[yIndex][xIndex] = 2;
-            repaint();
-            CURRENT_PLAYER = 1;
-        }
+    private void calculateMove(int row, int col) {
+        BOARD[row][col] = CURRENT_PLAYER;
+        repaint();
+        CURRENT_PLAYER = CURRENT_PLAYER == 1 ? 2 : 1;
         if (checkWinCondition()) {
             System.out.println("Win");
         }
     }
 
     private boolean checkWinCondition() {
-        // Check rows
+        // Check rows and columns
         for (int i = 0; i < 3; i++) {
             if (BOARD[i][0] == BOARD[i][1] && BOARD[i][1] == BOARD[i][2] && BOARD[i][0] != 0) {
                 winningLineType = 1; // Horizontal line
                 winningLineIndex = i;
                 return true;
             }
-        }
-
-        // Check columns
-        for (int j = 0; j < 3; j++) {
-            if (BOARD[0][j] == BOARD[1][j] && BOARD[1][j] == BOARD[2][j] && BOARD[0][j] != 0) {
+            if (BOARD[0][i] == BOARD[1][i] && BOARD[1][i] == BOARD[2][i] && BOARD[0][i] != 0) {
                 winningLineType = 2; // Vertical line
-                winningLineIndex = j;
+                winningLineIndex = i;
                 return true;
             }
         }
@@ -171,5 +134,4 @@ public class TicTacToe extends JPanel {
 
         return false;
     }
-
 }
