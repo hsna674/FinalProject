@@ -14,6 +14,8 @@ public class TicTacToe extends JPanel {
     private static int CURRENT_PLAYER = 1;
     private int winningLineType = 0; // 1 = horizontal, 2 = vertical, 3 = diagonal (top left to bottom right), 4 = diagonal (top right to bottom left)
     private int winningLineIndex = 0;
+    private static String currentPlayerText = "";
+    private int playerWin = 0; // 0 = None, 1 = Player 1, 2 = Player 2
 
     public TicTacToe() {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -51,11 +53,32 @@ public class TicTacToe extends JPanel {
 
         // Draw current player text
         g.setColor(Color.BLACK);
-        g.setFont(new Font("Arial", Font.BOLD, 24));
-        String currentPlayerText = "Current Player: " + (CURRENT_PLAYER == 1 ? "X" : "O");
+        g.setFont(new Font("Varela Round", Font.BOLD, 30));
+        String currentPlayerText = "Current Player: ";
         FontMetrics fm = g.getFontMetrics();
         int textWidth = fm.stringWidth(currentPlayerText);
         g.drawString(currentPlayerText, (WIDTH - textWidth) / 2, 50);
+
+        // Draw current player icon
+        g.setColor(Color.WHITE);
+        g.fillRect(190, 60, 100, 100);
+        if (CURRENT_PLAYER == 1) {
+            g.setColor(Color.RED);
+            g.drawLine(200, 70, 280, 150);
+            g.drawLine(200, 150, 280, 70);
+        } else {
+            g.setColor(Color.BLUE);
+            g.drawOval(200, 70, 80, 80);
+        }
+
+        //Draw current player text
+        g.setColor(Color.WHITE);
+        g.fillRect((WIDTH - fm.stringWidth(currentPlayerText)) / 2, 190, fm.stringWidth(currentPlayerText), 10);
+        currentPlayerText = "Player " + CURRENT_PLAYER;
+        g.setColor(Color.BLACK);
+        g.drawString(currentPlayerText, (WIDTH - fm.stringWidth(currentPlayerText)) / 2, 190);
+
+
 
         // Check win condition and draw winning line
         if (checkWinCondition()) {
@@ -108,26 +131,34 @@ public class TicTacToe extends JPanel {
     }
 
     private boolean checkWinCondition() {
-        // Check rows and columns
+        // Check rows
         for (int i = 0; i < 3; i++) {
             if (BOARD[i][0] == BOARD[i][1] && BOARD[i][1] == BOARD[i][2] && BOARD[i][0] != 0) {
+                playerWin = BOARD[i][0]; // Set winning player
                 winningLineType = 1; // Horizontal line
                 winningLineIndex = i;
                 return true;
             }
-            if (BOARD[0][i] == BOARD[1][i] && BOARD[1][i] == BOARD[2][i] && BOARD[0][i] != 0) {
+        }
+
+        // Check columns
+        for (int j = 0; j < 3; j++) {
+            if (BOARD[0][j] == BOARD[1][j] && BOARD[1][j] == BOARD[2][j] && BOARD[0][j] != 0) {
+                playerWin = BOARD[0][j]; // Set winning player
                 winningLineType = 2; // Vertical line
-                winningLineIndex = i;
+                winningLineIndex = j;
                 return true;
             }
         }
 
         // Check diagonals
         if ((BOARD[0][0] == BOARD[1][1] && BOARD[1][1] == BOARD[2][2] && BOARD[0][0] != 0)) {
+            playerWin = BOARD[0][0]; // Set winning player
             winningLineType = 3; // Diagonal (top left to bottom right)
             return true;
         }
         if (BOARD[0][2] == BOARD[1][1] && BOARD[1][1] == BOARD[2][0] && BOARD[0][2] != 0) {
+            playerWin = BOARD[0][2]; // Set winning player
             winningLineType = 4; // Diagonal (top right to bottom left)
             return true;
         }

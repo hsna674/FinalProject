@@ -65,7 +65,7 @@ public class GameLibraryPanel extends JPanel {
     public class pong_listener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             JFrame frame = new JFrame("Pong");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setResizable(false);
             frame.add(new Pong());
             frame.pack();
@@ -76,7 +76,7 @@ public class GameLibraryPanel extends JPanel {
     public class tic_tac_toe_listener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             JFrame frame = new JFrame("Tic Tac Toe");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setResizable(false);
             frame.add(new TicTacToe());
             frame.pack();
