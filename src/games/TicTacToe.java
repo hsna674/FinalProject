@@ -15,6 +15,7 @@ public class TicTacToe extends JPanel {
     private int winningLineType = 0; // 1 = horizontal, 2 = vertical, 3 = diagonal (top left to bottom right), 4 = diagonal (top right to bottom left)
     private int winningLineIndex = 0;
     private static String currentPlayerText = "";
+    private static String playerWinText = "";
     private int playerWin = 0; // 0 = None, 1 = Player 1, 2 = Player 2
 
     public TicTacToe() {
@@ -77,6 +78,15 @@ public class TicTacToe extends JPanel {
         currentPlayerText = "Player " + CURRENT_PLAYER;
         g.setColor(Color.BLACK);
         g.drawString(currentPlayerText, (WIDTH - fm.stringWidth(currentPlayerText)) / 2, 190);
+
+        //Draw current player text
+        if (playerWin != 0) {
+            g.setColor(Color.WHITE);
+            g.fillRect((WIDTH - fm.stringWidth(playerWinText)) / 2, 600, fm.stringWidth(playerWinText), 10);
+            playerWinText = "Player " + playerWin + " wins!";
+            g.setColor(Color.BLACK);
+            g.drawString(playerWinText, (WIDTH - fm.stringWidth(playerWinText)) / 2, 600);
+        }
 
 
 
