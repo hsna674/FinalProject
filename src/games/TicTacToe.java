@@ -22,6 +22,7 @@ public class TicTacToe extends JPanel {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setBackground(Color.WHITE);
         addMouseListener(new TicTacToeMouse());
+        resetGame();
     }
 
     protected void paintComponent(Graphics g) {
@@ -174,5 +175,20 @@ public class TicTacToe extends JPanel {
         }
 
         return false;
+    }
+
+    public void resetGame() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                BOARD[i][j] = 0; // Reset each cell on the board to empty
+            }
+        }
+        CURRENT_PLAYER = 1; // Reset current player to Player 1
+        winningLineType = 0; // Reset winning line type
+        winningLineIndex = 0; // Reset winning line index
+        playerWin = 0; // Reset winning player
+        currentPlayerText = ""; // Reset current player text
+        playerWinText = ""; // Reset winning player text
+        repaint(); // Repaint the panel to reflect the reset state
     }
 }

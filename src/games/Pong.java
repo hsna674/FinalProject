@@ -137,3 +137,4 @@ public class Pong extends JPanel implements KeyListener {
         return (int) Math.round(offset * (double) maxAngle / center);
     }
 }
+
