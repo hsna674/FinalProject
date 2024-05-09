@@ -1,3 +1,4 @@
+import games.ConnectFour;
 import games.Pong;
 import games.TicTacToe;
 
@@ -22,6 +23,7 @@ public class GameLibraryPanel extends JPanel {
 
         createGameButton("icons/tic_tac_toe_button.png", "Tic Tac Toe", new TicTacToeListener(), games, new Insets(0, 12, 0, 0));
         createGameButton("icons/pong_button.png", "Pong", new PongListener(), games, new Insets(0, 12, 0, 0));
+        createGameButton("icons/pong_button.png", "Connect 4", new ConnectFourListener(), games, new Insets(0, 12, 0, 0));
 
         add(games);
     }
@@ -90,6 +92,16 @@ public class GameLibraryPanel extends JPanel {
 
         public void actionPerformed(ActionEvent e) {
             createGameFrame(new Pong());
+        }
+    }
+
+    public class ConnectFourListener extends GameListener {
+        public ConnectFourListener() {
+            super("Connect Four");
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            createGameFrame(new ConnectFour());
         }
     }
 }
