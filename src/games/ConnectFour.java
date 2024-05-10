@@ -2,6 +2,10 @@ package games;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Scanner;
 
 public class ConnectFour extends JPanel {
@@ -12,7 +16,9 @@ public class ConnectFour extends JPanel {
 
     // Screen Dimensions
     private static final int WIDTH = 640;
-    private static final int HEIGHT = 480;
+    private static final int HEIGHT = 580;
+
+    private int DIFFICULTY = 2;
 
     private int[][] board; // 2D array representing the game board
     private int currentPlayer; // Current player (either AI_PLAYER or HUMAN_PLAYER)
@@ -24,16 +30,127 @@ public class ConnectFour extends JPanel {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setBackground(Color.WHITE);
         initializeBoard();
+
+        JPanel buttons = new JPanel(new GridLayout(1, 7));
+
+        JButton button0 = new JButton();
+        button0.addActionListener(new button0Listener());
+        buttons.add(button0);
+
+        JButton button1 = new JButton();
+        button1.addActionListener(new button1Listener());
+        buttons.add(button1);
+
+        JButton button2 = new JButton();
+        button2.addActionListener(new button2Listener());
+        buttons.add(button2);
+
+        JButton button3 = new JButton();
+        button3.addActionListener(new button3Listener());
+        buttons.add(button3);
+
+        JButton button4 = new JButton();
+        button4.addActionListener(new button4Listener());
+        buttons.add(button4);
+
+        JButton button5 = new JButton();
+        button5.addActionListener(new button5Listener());
+        buttons.add(button5);
+
+        JButton button6 = new JButton();
+        button6.addActionListener(new button6Listener());
+        buttons.add(button6);
+
+        add(buttons, BorderLayout.NORTH);
     }
+
+    public class button0Listener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            makeMove(0, HUMAN_PLAYER);
+            repaint();
+            makeAIMove();
+            repaint();
+        }
+    }
+
+    public class button1Listener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            makeMove(1, HUMAN_PLAYER);
+            repaint();
+            makeAIMove();
+            repaint();
+        }
+    }
+
+    public class button2Listener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            makeMove(2, HUMAN_PLAYER);
+            repaint();
+            makeAIMove();
+            repaint();
+        }
+    }
+
+    public class button3Listener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            makeMove(3, HUMAN_PLAYER);
+            repaint();
+            makeAIMove();
+            repaint();
+        }
+    }
+
+    public class button4Listener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            makeMove(4, HUMAN_PLAYER);
+            repaint();
+            makeAIMove();
+            repaint();
+        }
+    }
+
+    public class button5Listener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            makeMove(5, HUMAN_PLAYER);
+            repaint();
+            makeAIMove();
+            repaint();
+        }
+    }
+
+    public class button6Listener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            makeMove(6, HUMAN_PLAYER);
+            repaint();
+            makeAIMove();
+            repaint();
+        }
+    }
+
 
     public void paintComponent(Graphics g) {
         g.setColor(new Color(0x1c3c94));
-        g.fillOval(25, 50, 75, 75);
-        g.fillOval(540, 50, 75, 75);
-        g.fillOval(25, 380, 75, 75);
-        g.fillOval(540, 380, 75, 75);
-        g.fillRect(63, 50, 515, 405);
-        g.fillRect(25, 88, 590, 330);
+        g.fillOval(25, 90, 75, 75);
+        g.fillOval(540, 90, 75, 75);
+        g.fillOval(25, 420, 75, 75);
+        g.fillOval(540, 420, 75, 75);
+        g.fillRect(63, 90, 515, 405);
+        g.fillRect(25, 128, 590, 330);
+
+        for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < board[0].length; x++) {
+                if (board[y][x] == 0) {
+                    g.setColor(Color.WHITE);
+                    g.fillOval((x * 75) + 67, (y * 65) + 105, 50, 50);
+                } else if (board[y][x] == 1) {
+                    g.setColor(Color.RED);
+                    g.fillOval((x * 75) + 67, (y * 65) + 105, 50, 50);
+                } else if (board[y][x] == 2) {
+                    g.setColor(Color.YELLOW);
+                    g.fillOval((x * 75) + 67, (y * 65) + 105, 50, 50);
+                }
+            }
+        }
     }
 
     // Method to initialize the game board with empty cells
@@ -45,21 +162,11 @@ public class ConnectFour extends JPanel {
         }
     }
 
-    // Method to print the current state of the game board
-    public void printBoard() {
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 7; j++) {
-                System.out.print(board[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println("-------------");
-    }
-
     // Method to make a move for the current player
     public boolean makeMove(int column, int player) {
         // Check if the column is within bounds and not full
         if (column < 0 || column >= 7 || board[0][column] != EMPTY) {
+            repaint();
             return false; // Invalid move
         }
 
@@ -72,9 +179,11 @@ public class ConnectFour extends JPanel {
                 } else if (currentPlayer == AI_PLAYER) {
                     currentPlayer = HUMAN_PLAYER;
                 }
+                repaint();
                 return true; // Move successful
             }
         }
+        repaint();
         return false; // Column is full (should never reach this point in a valid game)
     }
 
@@ -130,11 +239,6 @@ public class ConnectFour extends JPanel {
             }
         }
         return false; // No win
-    }
-
-    public static void main(String[] args) {
-        ConnectFour game = new ConnectFour();
-        game.playAgainstAI();
     }
 
     // Implement alpha-beta pruning to optimize the minimax algorithm
@@ -323,7 +427,7 @@ public class ConnectFour extends JPanel {
 
         for (int column = 0; column < 7; column++) {
             if (makeMove(column, AI_PLAYER)) {
-                int score = minimax(10, Integer.MIN_VALUE, Integer.MAX_VALUE, currentPlayer);
+                int score = minimax(DIFFICULTY, Integer.MIN_VALUE, Integer.MAX_VALUE, currentPlayer);
                 undoMove(column); // Undo move
 
                 if (score > bestScore) {
@@ -335,42 +439,4 @@ public class ConnectFour extends JPanel {
 
         makeMove(bestMove, AI_PLAYER); // Make the best move for the AI player
     }
-
-    // Method to play the game against the AI
-    public void playAgainstAI() {
-        Scanner scanner = new Scanner(System.in);
-
-        while (!isGameOver()) {
-            printBoard();
-
-            // Human player's turn
-            System.out.println("Your turn. Enter column (1-7): ");
-            int column = scanner.nextInt() - 1;
-            if (makeMove(column, HUMAN_PLAYER)) {
-                if (isGameOver()) {
-                    break;
-                }
-                printBoard();
-            } else {
-                System.out.println("Invalid move! Please try again.");
-                continue;
-            }
-
-            // AI player's turn
-            makeAIMove();
-        }
-
-        printBoard();
-
-        if (isWin(HUMAN_PLAYER)) {
-            System.out.println("You win!");
-        } else if (isWin(AI_PLAYER)) {
-            System.out.println("AI wins!");
-        } else {
-            System.out.println("It's a draw!");
-        }
-
-        scanner.close();
-    }
-
 }
