@@ -2,6 +2,7 @@ import games.Battleship;
 import games.ConnectFour;
 import games.Pong;
 import games.TicTacToe;
+import games.twentyfortyeight.Game;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +27,13 @@ public class GameLibraryPanel extends JPanel {
         createGameButton("icons/pong_button.png", "Pong", new PongListener(), games, new Insets(0, 12, 0, 0));
         createGameButton("icons/pong_button.png", "Connect 4", new ConnectFourListener(), games, new Insets(0, 12, 0, 0));
         createGameButton("icons/battleship_button.png", "Battleship", new BattleshipListener(), games, new Insets(0, 12, 0, 0));
+
+        JButton twentyFortyEight = new JButton("2048");
+        twentyFortyEight.setIcon(new ImageIcon(getClass().getResource("icons/pong_button.png")));
+        twentyFortyEight.setPreferredSize(new Dimension(50, 50));
+        twentyFortyEight.setMargin(new Insets(0, 12, 0, 0));
+        twentyFortyEight.addActionListener(new twentyFortyEightListener());
+        games.add(twentyFortyEight);
 
         add(games);
     }
@@ -114,6 +122,12 @@ public class GameLibraryPanel extends JPanel {
 
         public void actionPerformed(ActionEvent e) {
             createGameFrame(new Battleship());
+        }
+    }
+
+    public class twentyFortyEightListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            new Game();
         }
     }
 }

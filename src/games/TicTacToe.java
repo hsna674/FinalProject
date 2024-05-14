@@ -80,7 +80,7 @@ public class TicTacToe extends JPanel {
         g.setColor(Color.BLACK);
         g.drawString(currentPlayerText, (WIDTH - fm.stringWidth(currentPlayerText)) / 2, 190);
 
-        //Draw current player text
+        //Draw winning player text
         if (playerWin != 0) {
             g.setColor(Color.WHITE);
             g.fillRect((WIDTH - fm.stringWidth(playerWinText)) / 2, 600, fm.stringWidth(playerWinText), 10);

@@ -62,7 +62,6 @@ public class Battleship extends JPanel {
                 matrix[row + 1][col] = 1;
                 matrix[row + 2][col] = 1;
                 matrix[row + 3][col] = 1;
-                matrix[row + 4][col] = 1;
             } else {
                 int row = (int) (Math.random() * 7);
                 int col = (int) (Math.random() * 7);
@@ -70,7 +69,6 @@ public class Battleship extends JPanel {
                 matrix[row][col + 1] = 1;
                 matrix[row][col + 2] = 1;
                 matrix[row][col + 3] = 1;
-                matrix[row][col + 4] = 1;
             }
             int coins = (int) (Math.random() * 2);
             if (coins == 0) {

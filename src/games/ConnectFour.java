@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Scanner;
 
 public class ConnectFour extends JPanel {
     // Define constants for empty, AI player, and human player pieces
@@ -28,105 +27,131 @@ public class ConnectFour extends JPanel {
         board = new int[6][7]; // Standard Connect 4 board size
         currentPlayer = HUMAN_PLAYER; // Human player starts the game
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        setBackground(Color.WHITE);
         initializeBoard();
 
-        JPanel buttons = new JPanel(new GridLayout(1, 7));
+        JPanel northButtons = new JPanel(new GridLayout(1, 7));
 
         JButton button0 = new JButton();
         button0.addActionListener(new button0Listener());
-        buttons.add(button0);
+        button0.setText("↓");
+        northButtons.add(button0);
 
         JButton button1 = new JButton();
         button1.addActionListener(new button1Listener());
-        buttons.add(button1);
+        button1.setText("↓");
+        northButtons.add(button1);
 
         JButton button2 = new JButton();
         button2.addActionListener(new button2Listener());
-        buttons.add(button2);
+        button2.setText("↓");
+        northButtons.add(button2);
 
         JButton button3 = new JButton();
         button3.addActionListener(new button3Listener());
-        buttons.add(button3);
+        button3.setText("↓");
+        northButtons.add(button3);
 
         JButton button4 = new JButton();
         button4.addActionListener(new button4Listener());
-        buttons.add(button4);
+        button4.setText("↓");
+        northButtons.add(button4);
 
         JButton button5 = new JButton();
         button5.addActionListener(new button5Listener());
-        buttons.add(button5);
+        button5.setText("↓");
+        northButtons.add(button5);
 
         JButton button6 = new JButton();
         button6.addActionListener(new button6Listener());
-        buttons.add(button6);
+        button6.setText("↓");
+        northButtons.add(button6);
 
-        add(buttons, BorderLayout.NORTH);
+        add(northButtons, BorderLayout.NORTH);
     }
 
     public class button0Listener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            makeMove(0, HUMAN_PLAYER);
-            repaint();
-            makeAIMove();
+            if (!isWin(HUMAN_PLAYER) && !isWin(AI_PLAYER)) {
+                makeMove(0, HUMAN_PLAYER);
+                repaint();
+                makeAIMove();
+                repaint();
+            }
             repaint();
         }
     }
 
     public class button1Listener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            makeMove(1, HUMAN_PLAYER);
-            repaint();
-            makeAIMove();
+            if (!isWin(HUMAN_PLAYER) && !isWin(AI_PLAYER)) {
+                makeMove(1, HUMAN_PLAYER);
+                repaint();
+                makeAIMove();
+                repaint();
+            }
             repaint();
         }
     }
 
     public class button2Listener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            makeMove(2, HUMAN_PLAYER);
-            repaint();
-            makeAIMove();
+            if (!isWin(HUMAN_PLAYER) && !isWin(AI_PLAYER)) {
+                makeMove(2, HUMAN_PLAYER);
+                repaint();
+                makeAIMove();
+                repaint();
+            }
             repaint();
         }
     }
 
     public class button3Listener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            makeMove(3, HUMAN_PLAYER);
-            repaint();
-            makeAIMove();
+            if (!isWin(HUMAN_PLAYER) && !isWin(AI_PLAYER)) {
+                makeMove(3, HUMAN_PLAYER);
+                repaint();
+                makeAIMove();
+                repaint();
+            }
             repaint();
         }
     }
 
     public class button4Listener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            makeMove(4, HUMAN_PLAYER);
-            repaint();
-            makeAIMove();
+            if (!isWin(HUMAN_PLAYER) && !isWin(AI_PLAYER)) {
+                makeMove(4, HUMAN_PLAYER);
+                repaint();
+                makeAIMove();
+                repaint();
+            }
             repaint();
         }
     }
 
     public class button5Listener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            makeMove(5, HUMAN_PLAYER);
-            repaint();
-            makeAIMove();
+            if (!isWin(HUMAN_PLAYER) && !isWin(AI_PLAYER)) {
+                makeMove(5, HUMAN_PLAYER);
+                repaint();
+                makeAIMove();
+                repaint();
+            }
             repaint();
         }
     }
 
     public class button6Listener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            makeMove(6, HUMAN_PLAYER);
-            repaint();
-            makeAIMove();
+            if (!isWin(HUMAN_PLAYER) && !isWin(AI_PLAYER)) {
+                makeMove(6, HUMAN_PLAYER);
+                repaint();
+                makeAIMove();
+                repaint();
+            }
             repaint();
         }
     }
-
 
     public void paintComponent(Graphics g) {
         g.setColor(new Color(0x1c3c94));
@@ -150,6 +175,22 @@ public class ConnectFour extends JPanel {
                     g.fillOval((x * 75) + 67, (y * 65) + 105, 50, 50);
                 }
             }
+        }
+
+        FontMetrics fm = g.getFontMetrics();
+
+        if (isWin(HUMAN_PLAYER)) {
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Varela Round", Font.BOLD, 24));
+            g.fillRect((WIDTH - fm.stringWidth("You won!")) / 2, 540, fm.stringWidth("You won!"), 10);
+            g.setColor(Color.BLACK);
+            g.drawString("You won!", ((WIDTH - fm.stringWidth("You won!")) / 2) - 20, 540);
+        } else if (isWin(AI_PLAYER)) {
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Varela Round", Font.BOLD, 24));
+            g.fillRect((WIDTH - fm.stringWidth("AI player wins!")) / 2, 540, fm.stringWidth("AI player wins!"), 10);
+            g.setColor(Color.BLACK);
+            g.drawString("AI player wins!", (WIDTH - fm.stringWidth("AI player wins!")) / 2, 540);
         }
     }
 
