@@ -263,8 +263,8 @@ public class Board {
             int col;
             int value = Math.random() < 0.9 ? 2 : 4;
             do {
-                row = (int) (Math.random () * 4);
-                col = (int) (Math.random () * 4);
+                row = (int) (Math.random() * 4);
+                col = (int) (Math.random() * 4);
             } while (getTileAt(row, col).getValue() != 0);
             setTileAt(row, col, new Tile(value, row, col));
             emptyTiles--;

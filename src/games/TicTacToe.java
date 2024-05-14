@@ -90,7 +90,6 @@ public class TicTacToe extends JPanel {
         }
 
 
-
         // Check win condition and draw winning line
         if (checkWinCondition()) {
             g2d.setColor(Color.GREEN);
@@ -111,7 +110,8 @@ public class TicTacToe extends JPanel {
     }
 
     class TicTacToeMouse implements MouseListener {
-        public void mouseClicked(MouseEvent e) {}
+        public void mouseClicked(MouseEvent e) {
+        }
 
         public void mousePressed(MouseEvent e) {
             int x = e.getX();
@@ -125,11 +125,14 @@ public class TicTacToe extends JPanel {
             }
         }
 
-        public void mouseReleased(MouseEvent e) {}
+        public void mouseReleased(MouseEvent e) {
+        }
 
-        public void mouseEntered(MouseEvent e) {}
+        public void mouseEntered(MouseEvent e) {
+        }
 
-        public void mouseExited(MouseEvent e) {}
+        public void mouseExited(MouseEvent e) {
+        }
     }
 
     private void calculateMove(int row, int col) {

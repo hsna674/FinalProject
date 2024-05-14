@@ -21,7 +21,7 @@ public class Window extends JFrame {
     public Window(String title) {
         super(title); // Window title
 
-        this.setLayout( new BorderLayout());
+        this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // close window to exit
         this.setSize(this.width, this.height);
         this.setLocationRelativeTo(null); // centering
@@ -29,7 +29,7 @@ public class Window extends JFrame {
         this.setResizable(false);
         this.setFocusable(true); // set focus on window so KeyListener works
 
-        getContentPane().add( new Grid() );
+        getContentPane().add(new Grid());
 
         JPanel panel = new JPanel();
         panel.add(createSimpleButton("NEW GAME"));

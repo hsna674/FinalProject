@@ -40,8 +40,8 @@ public class Grid extends JPanel {
     }
 
     private static void drawTitle(Graphics g) {
-        g.setFont( new Font(FONT, Font.BOLD, 38) );
-        g.setColor( ColorScheme.BRIGHT );
+        g.setFont(new Font(FONT, Font.BOLD, 38));
+        g.setColor(ColorScheme.BRIGHT);
         g.drawString("2048", WIN_MARGIN, 50);
     }
 
@@ -51,10 +51,10 @@ public class Grid extends JPanel {
         int xOffset = Game.WINDOW.getWidth() - WIN_MARGIN - width;
         int yOffset = 20;
         g.fillRoundRect(xOffset, yOffset, width, height, TILE_RADIUS, TILE_RADIUS);
-        g.setFont( new Font(FONT, Font.BOLD, 10) );
-        g.setColor( new Color(0XFFFFFF) );
+        g.setFont(new Font(FONT, Font.BOLD, 10));
+        g.setColor(new Color(0XFFFFFF));
         g.drawString("SCORE", xOffset + 22, yOffset + 15);
-        g.setFont( new Font(FONT, Font.BOLD, 12) );
+        g.setFont(new Font(FONT, Font.BOLD, 12));
         g.drawString(String.valueOf(Game.BOARD.getScore()), xOffset + 35, yOffset + 30);
     }
 
@@ -98,7 +98,6 @@ public class Grid extends JPanel {
             Game.BOARD.getTileAt(y, x).setPosition(y, x); // tile gets its new position
             g.drawString(s, xOffset + (TILE_SIZE - w) / 2, yOffset + TILE_SIZE - (TILE_SIZE - h) / 2 - 2);
         }
-
 
 
         if (Game.BOARD.getWonOrLost() != null && !Game.BOARD.getWonOrLost().isEmpty()) {
