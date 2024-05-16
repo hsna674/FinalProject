@@ -210,8 +210,6 @@ public class Board {
     public void isGameOver() {
 
         if (gameover) {
-            // vyhrál jsi (na desce je dláždice 2048)
-            // end(true);
             setWonOrLost("WON");
         } else {
             if (isFull()) {

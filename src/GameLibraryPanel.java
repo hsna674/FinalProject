@@ -1,7 +1,7 @@
-import games.Battleship;
-import games.ConnectFour;
-import games.Pong;
-import games.TicTacToe;
+import games.battleship.Battleship;
+import games.connectfour.ConnectFour;
+import games.pong.Pong;
+import games.tictactoe.TicTacToe;
 import games.twentyfortyeight.Game;
 
 import javax.swing.*;
@@ -23,23 +23,23 @@ public class GameLibraryPanel extends JPanel {
         games.setLayout(new FlowLayout(FlowLayout.CENTER));
         games.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        createGameButton("icons/tic_tac_toe_button.png", "Tic Tac Toe", new TicTacToeListener(), games, new Insets(0, 12, 0, 0));
-        createGameButton("icons/pong_button.png", "Pong", new PongListener(), games, new Insets(0, 12, 0, 0));
-        createGameButton("icons/pong_button.png", "Connect 4", new ConnectFourListener(), games, new Insets(0, 12, 0, 0));
-        createGameButton("icons/battleship_button.png", "Battleship", new BattleshipListener(), games, new Insets(0, 12, 0, 0));
-
-        JButton twentyFortyEight = new JButton("2048");
-        twentyFortyEight.setIcon(new ImageIcon(getClass().getResource("icons/pong_button.png")));
-        twentyFortyEight.setPreferredSize(new Dimension(50, 50));
-        twentyFortyEight.setMargin(new Insets(0, 12, 0, 0));
-        twentyFortyEight.addActionListener(new twentyFortyEightListener());
-        games.add(twentyFortyEight);
+        createGameButton("games/tictactoe/tic_tac_toe_button.png", "Tic Tac Toe", new TicTacToeListener(), games, new Insets(0, 12, 0, 0));
+        createGameButton("games/pong/pong_button.png", "Pong", new PongListener(), games, new Insets(0, 12, 0, 0));
+        createGameButton("games/pong/pong_button.png", "Connect 4", new ConnectFourListener(), games, new Insets(0, 12, 0, 0));
+        createGameButton("games/battleship/battleship_button.png", "Battleship", new BattleshipListener(), games, new Insets(0, 12, 0, 0));
+        createGameButton("games/twentyfortyeight/twenty_forty_eight_button.png", "2048", new twentyFortyEightListener(), games, new Insets(0, 12, 0, 0));
 
         add(games);
     }
 
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    protected void paintComponent(Graphics g2) {
+        super.paintComponent(g2);
+
+        Graphics2D g = ((Graphics2D) g2);
+
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
         g.setColor(Color.decode("#9debe9"));
         g.fillRect(0, 0, 800, 50);
     }
@@ -125,7 +125,11 @@ public class GameLibraryPanel extends JPanel {
         }
     }
 
-    public class twentyFortyEightListener implements ActionListener {
+    public class twentyFortyEightListener extends GameListener {
+        public twentyFortyEightListener() {
+            super("2048");
+        }
+
         public void actionPerformed(ActionEvent e) {
             new Game();
         }

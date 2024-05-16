@@ -1,4 +1,4 @@
-package games;
+package games.pong;
 
 import java.awt.*;
 import java.awt.event.*;

@@ -1,4 +1,4 @@
-package games;
+package games.connectfour;
 
 import javax.swing.*;
 import java.awt.*;
