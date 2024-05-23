@@ -29,13 +29,7 @@ public class SidePanel extends JPanel {
     public SidePanel() {
         this.setBackground(new Color(0, 0, 50));
         this.setPreferredSize(new Dimension(210, 400));
-        this.setBorder(BorderFactory.createTitledBorder(
-                null,
-                "Tetris",
-                TitledBorder.CENTER, TitledBorder.TOP,
-                new Font("Berlin Sans FB Demi", Font.PLAIN, 12),
-                Color.white)
-        );
+        this.setBorder(BorderFactory.createTitledBorder(null, "Tetris", TitledBorder.CENTER, TitledBorder.TOP, new Font("Berlin Sans FB Demi", Font.PLAIN, 12), Color.white));
 
         initComponents();
     }
@@ -64,36 +58,8 @@ public class SidePanel extends JPanel {
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(pauseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labelScore, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(60, 60, 60))
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(labelScoreUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(10, 10, 10))
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(labelScore, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(labelScoreUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(50, 50, 50)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(pauseButton)
-                                        .addComponent(startButton))
-                                .addContainerGap(220, Short.MAX_VALUE))
-        );
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addGap(10, 10, 10).addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(10, 10, 10).addComponent(pauseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(10, 10, 10)).addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup().addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(labelScore, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(60, 60, 60)).addGroup(layout.createSequentialGroup().addGap(10, 10, 10).addComponent(labelScoreUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGap(10, 10, 10)));
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addGap(40, 40, 40).addComponent(labelScore, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(5, 5, 5).addComponent(labelScoreUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(50, 50, 50).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(pauseButton).addComponent(startButton)).addContainerGap(220, Short.MAX_VALUE)));
     }
 
     public void setScore(int s) {
@@ -118,8 +84,7 @@ public class SidePanel extends JPanel {
             board.startGame();
             startButton.setText("Reset");
             setStart(true);
-        }
-        else if (isStarted()) {
+        } else if (isStarted()) {
             board.resetGame();
             startButton.setText("Start");
             setStart(false);
@@ -140,8 +105,7 @@ public class SidePanel extends JPanel {
                 board.setAnimation(false);
                 pauseButton.setText("Resume");
                 setPaused(true);
-            }
-            else if (isPaused()) {
+            } else if (isPaused()) {
                 board.setAnimation(true);
                 pauseButton.setText("Pause");
                 setPaused(false);
