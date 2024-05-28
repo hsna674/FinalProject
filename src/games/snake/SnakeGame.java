@@ -86,7 +86,7 @@ public class SnakeGame extends JPanel implements ActionListener {
         SnakeGame game = new SnakeGame();
         frame.add(game);
         frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
     }
 }

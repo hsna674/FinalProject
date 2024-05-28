@@ -1,6 +1,7 @@
 import games.battleship.Battleship;
 import games.connectfour.ConnectFour;
 import games.pong.Pong;
+import games.snake.SnakeGame;
 import games.tetris.Board;
 import games.tetris.SidePanel;
 import games.tetris.Tetris;
@@ -28,10 +29,11 @@ public class GameLibraryPanel extends JPanel {
 
         createGameButton("games/tictactoe/tic_tac_toe_button.png", "Tic Tac Toe", new TicTacToeListener(), games, new Insets(0, 12, 0, 0));
         createGameButton("games/pong/pong_button.png", "Pong", new PongListener(), games, new Insets(0, 12, 0, 0));
-        createGameButton("games/pong/pong_button.png", "Connect 4", new ConnectFourListener(), games, new Insets(0, 12, 0, 0));
+        createGameButton("games/connectfour/connect_four_button.png", "Connect 4", new ConnectFourListener(), games, new Insets(0, 12, 0, 0));
         createGameButton("games/battleship/battleship_button.png", "Battleship", new BattleshipListener(), games, new Insets(0, 12, 0, 0));
         createGameButton("games/twentyfortyeight/twenty_forty_eight_button.png", "2048", new twentyFortyEightListener(), games, new Insets(0, 12, 0, 0));
         createGameButton("games/tetris/tetris_button.png", "Tetris", new tetrisListener(), games, new Insets(0, 12, 0, 0));
+        createGameButton("games/snake/snake_button.png", "Snake", new snakeListener(), games, new Insets(0, 12, 0, 0));
 
         add(games);
     }
@@ -142,6 +144,12 @@ public class GameLibraryPanel extends JPanel {
     public class tetrisListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             Tetris.main(new String[0]);
+        }
+    }
+
+    public class snakeListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            SnakeGame.main(new String[0]);
         }
     }
 }
