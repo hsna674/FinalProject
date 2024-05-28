@@ -18,7 +18,15 @@ public class Pong extends JPanel implements KeyListener {
     private int ballDX, ballDY;
     private int player1Score, player2Score;
 
-    public Pong() {
+    private boolean isPaused = false;
+    private CardLayout cardLayout;
+    private JPanel mainPanel;
+    private PausePanel pausePanel;
+
+    public Pong(JPanel mainPanel, CardLayout cardLayout) {
+        this.mainPanel = mainPanel;
+        this.cardLayout = cardLayout;
+
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setBackground(Color.BLACK);
         setFocusable(true);
@@ -29,8 +37,10 @@ public class Pong extends JPanel implements KeyListener {
         resetBall();
 
         new Timer(10, e -> {
-            updateGame();
-            repaint();
+            if (!isPaused) {
+                updateGame();
+                repaint();
+            }
         }).start();
     }
 
@@ -50,7 +60,6 @@ public class Pong extends JPanel implements KeyListener {
     }
 
     public void keyTyped(KeyEvent e) {
-
     }
 
     public void keyPressed(KeyEvent e) {
@@ -62,6 +71,8 @@ public class Pong extends JPanel implements KeyListener {
             player2Up = true;
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             player2Down = true;
+        } else if (e.getKeyCode() == KeyEvent.VK_P) {
+            togglePause();
         }
     }
 
@@ -74,6 +85,17 @@ public class Pong extends JPanel implements KeyListener {
             player2Up = false;
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             player2Down = false;
+        }
+    }
+
+    private void togglePause() {
+        isPaused = !isPaused;
+        if (isPaused) {
+            cardLayout.show(mainPanel, "pause");
+            mainPanel.getComponent(1).requestFocus(); // Ensure pause panel gets focus
+        } else {
+            cardLayout.show(mainPanel, "game");
+            mainPanel.getComponent(0).requestFocus(); // Ensure game panel gets focus
         }
     }
 
@@ -136,5 +158,62 @@ public class Pong extends JPanel implements KeyListener {
         int maxAngle = 4; // Adjust for desired bounce variation
         return (int) Math.round(offset * (double) maxAngle / center);
     }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Pong");
+        CardLayout cardLayout = new CardLayout();
+        JPanel mainPanel = new JPanel(cardLayout);
+
+        Pong gamePanel = new Pong(mainPanel, cardLayout);
+        PausePanel pausePanel = new PausePanel(mainPanel, cardLayout);
+
+        mainPanel.add(gamePanel, "game");
+        mainPanel.add(pausePanel, "pause");
+
+        cardLayout.show(mainPanel, "game");
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.add(mainPanel, BorderLayout.CENTER);
+        frame.pack();
+        frame.setVisible(true);
+
+        gamePanel.requestFocusInWindow(); // Ensure game panel gets initial focus
+    }
 }
 
+class PausePanel extends JPanel implements KeyListener {
+
+    private JPanel mainPanel;
+    private CardLayout cardLayout;
+
+    public PausePanel(JPanel mainPanel, CardLayout cardLayout) {
+        this.mainPanel = mainPanel;
+        this.cardLayout = cardLayout;
+        setPreferredSize(new Dimension(640, 480));
+        setBackground(Color.BLACK);
+        setFocusable(true);
+        addKeyListener(this);
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Serif", Font.BOLD, 30));
+        g.drawString("PAUSED", 270, 240);
+    }
+
+    public void keyTyped(KeyEvent e) {
+    }
+
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_P) {
+            cardLayout.show(mainPanel, "game");
+            mainPanel.getComponent(0).requestFocus(); // Ensure game panel gets focus
+        }
+    }
+
+    public void keyReleased(KeyEvent e) {
+    }
+}

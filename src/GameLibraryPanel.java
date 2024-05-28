@@ -2,8 +2,6 @@ import games.battleship.Battleship;
 import games.connectfour.ConnectFour;
 import games.pong.Pong;
 import games.snake.SnakeGame;
-import games.tetris.Board;
-import games.tetris.SidePanel;
 import games.tetris.Tetris;
 import games.tictactoe.TicTacToe;
 import games.twentyfortyeight.Game;
@@ -101,13 +99,9 @@ public class GameLibraryPanel extends JPanel {
         }
     }
 
-    public class PongListener extends GameListener {
-        public PongListener() {
-            super("Pong");
-        }
-
+    public class PongListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            createGameFrame(new Pong());
+            Pong.main(new String[0]);
         }
     }
 
