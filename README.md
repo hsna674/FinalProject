@@ -1,7 +1,7 @@
 # Game Library README
 
 ## Overview
-Welcome to the Game Library! This Java program is a collection of nine different games, each offering a unique and entertaining experience. Whether you're looking to challenge your mind or just have some fun, you'll find a game that suits your mood.
+Welcome to the Game Library! This Java program is a collection of eight different games, each offering a unique and entertaining experience. Whether you're looking to challenge your mind or just have some fun, you'll find a game that suits your mood.
 
 ## Games Included
 1. **Tic-Tac-Toe**
@@ -12,7 +12,6 @@ Welcome to the Game Library! This Java program is a collection of nine different
 6. **Tetris**
 7. **Connect 4**
 8. **Space Invaders**
-9. **Dinosaur Chrome Game**
 
 ## Getting Started
 ### Prerequisites
@@ -50,18 +49,17 @@ If you prefer running the program from the command line:
     ```
 
 ## How to Play
-Upon launching the Game Library, you will be presented with a menu to select one of the nine games. Use the corresponding number to choose a game and follow the on-screen instructions to play.
+Upon launching the Game Library, you will be presented with a menu to select one of the eight games. Use the corresponding number to choose a game and follow the on-screen instructions to play.
 
 ### Game Controls
 - **Tic Tac Toe**: Click in the place where you want to place your piece
 - **Ping Pong**: Use the `W` and `S` keys to move Player 1 and the `Up` and `Down` arrows to move Player 2
 - **BattleShip**: Click cells to attempt to sink the 2 ships.
 - **2048**: Use the arrow keys to move the board around.
-- **Snake**: TBD
-- **Tetris**: TBD
+- **Snake**: Use the arrow keys to move the Snake around and eat the "Apples", which are red dots.
+- **Tetris**: Use the `Left` and `Right` arrow keys to move the pieces left and right. Use the `Up` key to rotate the pieces.
 - **Connect 4**: Click on the button above the column where you want to drop your piece.
-- **Space invaders**: TBD
-- **Dinosaur Chrome Game**: TBD
+- **Space invaders**: Use the `Left` and `Right` arrow keys to move the player left and right. Use the `Space bar` to shoot projectiles at the aliens.
 
 ## Contributing
 Contributions are welcome! If you'd like to contribute to this project, please follow these steps:

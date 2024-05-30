@@ -28,7 +28,7 @@ public class Pong extends JPanel implements KeyListener {
         this.cardLayout = cardLayout;
 
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        setBackground(Color.BLACK);
+        setBackground(new Color(40, 92, 49));
         setFocusable(true);
         addKeyListener(this);
 
@@ -47,16 +47,31 @@ public class Pong extends JPanel implements KeyListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // Draw elements
-        g.setColor(Color.WHITE);
+
+        g.setColor(Color.black);
+        g.fillRect(320, 0, 5, 480);
+        g.fillOval(218, 140, 200, 200);
+        g.setColor(Color.gray.brighter());
+        g.fillRect(160, 0, 5, 480);
+        g.fillRect(480, 0, 5, 480);
+        g.fillRect(60, 0, 5, 480);
+        g.fillRect(580, 0, 5, 480);
+        g.setColor(new Color(40, 92, 49));
+        g.fillOval(223, 289 / 2, 190, 190);
+        g.setColor(Color.black);
+        g.setFont(new Font("Serif", Font.BOLD, 35));
+        g.drawString("Pong!", 280, 248);
+        g.setColor(Color.blue.brighter());
         g.fillRect(0, paddle1Y, PADDLE_WIDTH, PADDLE_HEIGHT);
         g.fillRect(WIDTH - PADDLE_WIDTH, paddle2Y, PADDLE_WIDTH, PADDLE_HEIGHT);
+        g.setColor(Color.white);
         g.fillOval(ballX, ballY, BALL_DIAMETER, BALL_DIAMETER);
+        g.setColor(Color.white);
 
-        // Draw scores
+
         g.setFont(new Font("Serif", Font.BOLD, 30));
-        g.drawString(String.valueOf(player1Score), WIDTH / 4, 50);
-        g.drawString(String.valueOf(player2Score), 3 * WIDTH / 4, 50);
+        g.drawString(String.valueOf(player1Score), (WIDTH / 4) + 10, 50);
+        g.drawString(String.valueOf(player2Score), (3 * WIDTH / 4) - 19, 50);
     }
 
     public void keyTyped(KeyEvent e) {

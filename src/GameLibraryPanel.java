@@ -2,6 +2,7 @@ import games.battleship.Battleship;
 import games.connectfour.ConnectFour;
 import games.pong.Pong;
 import games.snake.SnakeGame;
+import games.spaceinvaders.SpaceInvaders;
 import games.tetris.Tetris;
 import games.tictactoe.TicTacToe;
 import games.twentyfortyeight.Game;
@@ -32,6 +33,7 @@ public class GameLibraryPanel extends JPanel {
         createGameButton("games/twentyfortyeight/twenty_forty_eight_button.png", "2048", new twentyFortyEightListener(), games, new Insets(0, 12, 0, 0));
         createGameButton("games/tetris/tetris_button.png", "Tetris", new tetrisListener(), games, new Insets(0, 12, 0, 0));
         createGameButton("games/snake/snake_button.png", "Snake", new snakeListener(), games, new Insets(0, 12, 0, 0));
+        createGameButton("games/spaceinvaders/space_invaders_button.png", "Space Invaders", new spaceInvadersListener(), games, new Insets(0, 12, 0, 0));
 
         add(games);
     }
@@ -144,6 +146,12 @@ public class GameLibraryPanel extends JPanel {
     public class snakeListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             SnakeGame.main(new String[0]);
+        }
+    }
+
+    public class spaceInvadersListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            SpaceInvaders.main(new String[0]);
         }
     }
 }
