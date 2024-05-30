@@ -15,6 +15,7 @@ public class SnakeGame extends JPanel implements ActionListener {
     private int WIDTH = 300;
     private int HEIGHT = 300;
     GameStatistics statistics = new GameStatistics();
+    private String highscoreText;
 
     public SnakeGame() {
         snake = new Snake();
@@ -75,9 +76,18 @@ public class SnakeGame extends JPanel implements ActionListener {
             snake.draw(g);
             apple.draw(g);
         } else {
+            FontMetrics fm2 = g.getFontMetrics();
             g.setColor(Color.RED);
             g.setFont(new Font("Arial", Font.BOLD, 40));
             g.drawString("Game Over", 50, 150);
+
+            g.setFont(new Font("Arial", Font.BOLD, 20));
+
+            highscoreText = "Highscore: " + statistics.getHighScore();
+            int x2 = (getWidth() - fm2.stringWidth(highscoreText)) / 2;
+
+            g.setColor(Color.WHITE);
+            g.drawString(highscoreText, x2 + 20, 180);
         }
     }
 
