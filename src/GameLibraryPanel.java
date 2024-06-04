@@ -16,15 +16,19 @@ import java.net.URL;
 public class GameLibraryPanel extends JPanel {
     public GameLibraryPanel() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setOpaque(true);
+
 
         JLabel title = new JLabel("Game Library");
-        title.setFont(new Font("Varela Round", Font.BOLD, 35));
+        title.setForeground(Color.decode("#072659"));
+        title.setFont(new Font("Varela Round", Font.BOLD, 45));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(title);
 
         JPanel games = new JPanel();
         games.setLayout(new FlowLayout(FlowLayout.CENTER));
         games.setAlignmentX(Component.CENTER_ALIGNMENT);
+        games.setBackground(Color.decode("#94bdff"));
 
         createGameButton("games/tictactoe/tic_tac_toe_button.png", "Tic Tac Toe", new TicTacToeListener(), games, new Insets(0, 12, 0, 0));
         createGameButton("games/pong/pong_button.png", "Pong", new PongListener(), games, new Insets(0, 12, 0, 0));
@@ -46,8 +50,8 @@ public class GameLibraryPanel extends JPanel {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-        g.setColor(Color.decode("#9debe9"));
-        g.fillRect(0, 0, 800, 50);
+        g.setColor(Color.decode("#4287f5"));
+        g.fillRect(0, 0, 800, 75);
     }
 
     protected void createGameButton(String iconPath, String buttonText, ActionListener listener, JPanel panel, Insets margin) {
