@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class ConnectFour extends JPanel {
     // Define constants for empty, AI player, and human player pieces
@@ -17,9 +15,7 @@ public class ConnectFour extends JPanel {
     private static final int WIDTH = 640;
     private static final int HEIGHT = 580;
 
-    private int DIFFICULTY = 2;
-
-    private int[][] board; // 2D array representing the game board
+    private final int[][] board; // 2D array representing the game board
     private int currentPlayer; // Current player (either AI_PLAYER or HUMAN_PLAYER)
 
     // Constructor to initialize the game board and set the current player
@@ -468,6 +464,7 @@ public class ConnectFour extends JPanel {
 
         for (int column = 0; column < 7; column++) {
             if (makeMove(column, AI_PLAYER)) {
+                int DIFFICULTY = 2;
                 int score = minimax(DIFFICULTY, Integer.MIN_VALUE, Integer.MAX_VALUE, currentPlayer);
                 undoMove(column); // Undo move
 
