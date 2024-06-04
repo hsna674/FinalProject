@@ -5,7 +5,7 @@ import java.io.*;
 public class GameStatistics {
     private int score;
     private int highScore;
-    private static final String HIGH_SCORE_FILE = "highscore.txt";
+    private static final String HIGH_SCORE_FILE = "src/games/snake/highscore.txt";
 
     public GameStatistics() {
         this.score = 0;
