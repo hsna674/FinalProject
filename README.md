@@ -82,7 +82,6 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
 
 ## Acknowledgments
-- Thanks to all the contributors who helped in developing and testing this Game Library.
 - Special thanks to the open-source community for providing the tools and libraries used in this project.
 
 Enjoy the games!
